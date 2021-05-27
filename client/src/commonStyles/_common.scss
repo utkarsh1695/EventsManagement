@@ -6,7 +6,45 @@ li {
   margin: 0;
 }
 
-button {
+button,
+.btn {
   outline: none;
   border: none;
+}
+
+// CTA Common CSS
+.btn__primary {
+  margin-right: 20px;
+  padding: 4px 10px;
+  background: $DBlue;
+  color: $White;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid $DBlue;
+
+  &:active,
+  &:hover {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.btn__secondary {
+  @extend .btn__primary;
+  color: $DBlue;
+  background: $White;
+}
+
+.formControl {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+
+  label {
+    line-height: 24px;
+  }
+
+  input {
+    line-height: 24px;
+    outline: none;
+  }
 }

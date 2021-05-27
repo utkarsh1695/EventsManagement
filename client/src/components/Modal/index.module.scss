@@ -1,0 +1,43 @@
+@import "../../commonStyles/_variables.scss";
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.container {
+  position: fixed;
+  width: 90%;
+  top: 10%;
+  left: 5%;
+  background-color: $White;
+  box-shadow: rgba(0, 0, 0, 0.4);
+
+  header {
+    padding: 9px 18px;
+    background-color: $DBlue;
+    color: $White;
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 9px 18px;
+  }
+}
+
+// for bigger screens
+@media (min-width: 768px) {
+  .container {
+    width: 350px;
+    left: calc((100% - 350px) / 2);
+  }
+}

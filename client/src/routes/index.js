@@ -1,4 +1,4 @@
-// import { shallowEqual, useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import {
   AuthContainer,
@@ -8,15 +8,19 @@ import {
 import routesConfig from "./config";
 
 const Routes = () => {
-  // const auth = useSelector((state) => state?.auth, shallowEqual);
+  const auth = useSelector((state) => state?.auth, shallowEqual);
 
-  // const token = auth?.token;
+  const token = auth?.token;
   return (
     <Switch>
-      <Redirect exact path={routesConfig.BASE} to={routesConfig.AUTH} />
-      <Route path={routesConfig.AUTH} component={AuthContainer} />
+      {token && <Redirect exact path={"/"} to={"/events"} />}
+      {token && <Redirect exact path={"/auth"} to={"/events"} />}
+      {!token && <Route path={routesConfig.AUTH} component={AuthContainer} />}
       <Route path={routesConfig.EVENTS} component={EventsContainer} />
-      <Route path={routesConfig.BOOKINGS} component={BookingsContainer} />
+      {token && (
+        <Route path={routesConfig.BOOKINGS} component={BookingsContainer} />
+      )}
+      {!token && <Redirect exact to={routesConfig.AUTH} />}
     </Switch>
   );
 };
