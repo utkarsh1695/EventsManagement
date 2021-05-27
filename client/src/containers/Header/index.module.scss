@@ -1,0 +1,33 @@
+@import "../../commonStyles/_variables.scss";
+
+.container {
+  display: flex;
+  padding: 12px 18px;
+  align-items: center;
+  background: $DBlue;
+
+  h3 {
+    color: $White;
+    font-style: italic;
+  }
+
+  ul {
+    list-style: none;
+    display: inline-flex;
+
+    li {
+      margin-right: 12px;
+
+      a {
+        color: $White;
+        text-decoration: none;
+
+        &:hover,
+        &:active,
+        &.active {
+          color: $Green;
+        }
+      }
+    }
+  }
+}

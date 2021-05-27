@@ -1,27 +1,33 @@
 const {
   bookEvent,
   cancelBooking,
-} = require('../../../mongodb/services/bookingService');
-const { createEvent } = require('../../../mongodb/services/eventService');
-const { createUser } = require('../../../mongodb/services/userService');
+} = require("../../../mongodb/services/bookingService");
+const { createEvent } = require("../../../mongodb/services/eventService");
+const { createUser } = require("../../../mongodb/services/userService");
 
 const unauthorised = () => {
-  throw new Error('Unauthorised!');
+  throw new Error("Unauthorised!");
 };
 
 const mutationResolvers = {
-  bookEvent: (args, req) => {
+  bookEvent: async (args, req) => {
     !req.auth && unauthorised();
-    bookEvent(args.eventId, req.userId);
+    const response = await bookEvent(args.eventId, req.userId);
+    return response;
   },
-  cancelBooking: (args, req) => {
+  cancelBooking: async (args, req) => {
     !req.auth && unauthorised();
-    cancelBooking(args.bookingId);
+    const response = await cancelBooking(args.bookingId);
+    return response;
   },
-  createUser: args => createUser(args.userInput),
-  createEvent: (args, req) => {
+  createUser: async (args, context) => {
+    const response = await createUser(args.userInput);
+    return response;
+  },
+  createEvent: async (args, req) => {
     !req.auth && unauthorised();
-    createEvent(args.eventInput, req.userId);
+    const response = createEvent(args.eventInput, req.userId);
+    return response;
   },
 };
 
