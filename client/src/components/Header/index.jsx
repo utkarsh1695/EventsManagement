@@ -25,11 +25,21 @@ const Header = () => {
           </NavLink>
         </li>
         {token && (
-          <li>
-            <NavLink activeClassName={style.active} to={routesConfig.BOOKINGS}>
-              Bookings
-            </NavLink>
-          </li>
+          <>
+            <li>
+              <NavLink
+                activeClassName={style.active}
+                to={routesConfig.BOOKINGS}
+              >
+                Bookings
+              </NavLink>
+            </li>
+            <li>
+              <NavLink activeClassName={style.active} to={routesConfig.AUTH}>
+                Logout
+              </NavLink>
+            </li>
+          </>
         )}
       </ul>
     </nav>

@@ -12,7 +12,7 @@ export const login = async ({ email, password }) => {
       }
     `,
   });
-  return response.login;
+  return response?.errors ? response.errors : response.data.login;
 };
 
 export const createUser = async ({ email, password }) => {
@@ -26,5 +26,54 @@ export const createUser = async ({ email, password }) => {
       }
     `,
   });
-  return response.createUser;
+  return response?.errors ? response.errors : response.data.createUser;
+};
+
+export const getEvents = async () => {
+  const response = await fetch({
+    query: `
+      query {
+        events {
+          _id
+          name
+          description
+          price
+          date
+          createdBy {
+            _id
+            email
+          }
+        }
+      }
+    `,
+  });
+  return response?.errors ? response.errors : response.data.events;
+};
+
+export const createEvent = async ({
+  title,
+  description,
+  date,
+  price,
+  token,
+}) => {
+  const response = await fetch({
+    query: `
+      mutation {
+        createEvent(eventInput:{name:"${title}", description:"${description}", price:${price}, date:"${date}"}) {
+          _id
+          name
+          description
+          price
+          date
+          createdBy {
+            _id
+            email
+          }
+        }
+      }
+    `,
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response?.errors ? response.errors : response.data.createEvent;
 };

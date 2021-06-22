@@ -1,9 +1,24 @@
 @import "../../commonStyles/_variables.scss";
 
 .container {
-  width: 250px;
-  border: 1px solid $DBlue;
-  margin: 50px auto;
-  padding: 30px 100px;
-  text-align: center;
+  .createEventCtaContainer {
+    width: 250px;
+    border: 1px solid $DBlue;
+    margin: 50px auto;
+    padding: 30px 100px;
+    text-align: center;
+  }
+
+  ul {
+    list-style: none;
+    margin: 20px auto;
+    width: 90%;
+    padding: 0;
+
+    li {
+      padding: 8px 12px;
+      margin: 5px 0;
+      border: 1px solid $DBlue;
+    }
+  }
 }

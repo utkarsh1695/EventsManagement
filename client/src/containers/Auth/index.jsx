@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { createUser, login } from "../../services";
-import { loginAction } from "../../store/actions";
+import { authAction } from "../../store/actions";
 import style from "./index.module.scss";
 
 function Auth() {
@@ -28,7 +28,8 @@ function Auth() {
       response = await createUser({ email, password });
     }
 
-    dispatch(loginAction(response));
+    console.log({ response });
+    dispatch(authAction(response));
   };
 
   return (

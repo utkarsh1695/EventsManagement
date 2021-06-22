@@ -30,7 +30,7 @@ const auth = (req, res, next) => {
   }
 
   req.auth = true;
-  req.userId = decoded.userId;
+  req.userId = decodedToken.userId;
   next();
 };
 

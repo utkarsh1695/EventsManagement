@@ -1,6 +1,6 @@
-const Event = require('../models/Event');
-const User = require('../models/User');
-const { eventEntityToData } = require('./utilities');
+const Event = require("../models/Event");
+const User = require("../models/User");
+const { eventEntityToData } = require("./utilities");
 
 const getEvents = async () => {
   try {
@@ -24,6 +24,7 @@ const createEvent = async (eventInput, userId) => {
     });
     const createdEvent = await event.save();
 
+    const existingUser = await User.findOne({ _id: userId });
     existingUser.createdEvents.push(event);
     await existingUser.save();
 

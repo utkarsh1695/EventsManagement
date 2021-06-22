@@ -7,9 +7,13 @@ const instance = Axios.create({
   },
 });
 
-const fetch = async ({ query }) => {
-  const response = await instance.post("/api", { query });
-  return response?.data?.data;
+const fetch = async ({ query, headers }) => {
+  try {
+    const response = await instance.post("/api", { query }, { headers });
+    return response?.data;
+  } catch (err) {
+    return err?.response?.data;
+  }
 };
 
 export { fetch };

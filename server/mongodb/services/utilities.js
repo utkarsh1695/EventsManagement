@@ -1,24 +1,24 @@
-const Event = require('../models/Event');
-const User = require('../models/User');
+const Event = require("../models/Event");
+const User = require("../models/User");
 
 /**
  * //************ Utility Functions ************
  */
 
-const dateToString = date => new Date(date).toISOString();
+const dateToString = (date) => new Date(date).toISOString();
 
-const eventEntityToData = event => ({
+const eventEntityToData = (event) => ({
   ...event.toJSON(),
   date: dateToString(event.date),
   createdBy: userById.bind(this, event.toJSON().createdBy),
 });
 
-const userEntityToData = user => ({
+const userEntityToData = (user) => ({
   ...user.toJSON(),
   createdEvents: eventsByIds.bind(this, user.toJSON().createdEvents),
 });
 
-const bookingEntityToData = booking => ({
+const bookingEntityToData = (booking) => ({
   ...booking.toJSON(),
   user: userEntityToData(booking.user),
   event: eventEntityToData(booking.event),
@@ -30,7 +30,7 @@ const bookingEntityToData = booking => ({
  * //************ Utility Services ************
  */
 
-const eventsByIds = async eventIds => {
+const eventsByIds = async (eventIds) => {
   try {
     const events = await Event.find({ _id: { $in: eventIds } });
     return events.map(eventEntityToData);
@@ -39,7 +39,7 @@ const eventsByIds = async eventIds => {
   }
 };
 
-const userById = async userId => {
+const userById = async (userId) => {
   try {
     const user = await User.findById(userId);
     return userEntityToData(user);
