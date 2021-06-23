@@ -43,10 +43,14 @@ function Auth() {
         <input id={"__auth_password__"} type="password" ref={passwordEl} />
       </div>
       <div className={"formActions"}>
-        <button className="btn__primary" type="submit">
+        <button className="btn btn__primary" type="submit">
           Submit
         </button>
-        <button className="btn__secondary" type="button" onClick={switchMode}>
+        <button
+          className="btn btn__secondary"
+          type="button"
+          onClick={switchMode}
+        >
           {isLogin ? "Sign Up" : "Login"}
         </button>
       </div>

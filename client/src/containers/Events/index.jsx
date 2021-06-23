@@ -48,18 +48,16 @@ function Events() {
     setModal(false);
   };
 
-  console.log({
-    events,
-  });
   return (
     <div className={style.container}>
       {auth?.token && (
         <div className={style.createEventCtaContainer}>
-          <button className="btn__primary" onClick={showModal}>
+          <button className="btn btn__primary" onClick={showModal}>
             Create Event
           </button>
         </div>
       )}
+      <h2>Events</h2>
       <ul>
         {events.map((event) => (
           <li key={event._id}>{event.name}</li>

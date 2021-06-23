@@ -16,10 +16,10 @@ const Modal = ({
         </header>
         <div className={style.content}>{children}</div>
         <div className={style.actions}>
-          <button className="btn__primary" onClick={onCancel}>
+          <button className="btn btn__primary" onClick={onCancel}>
             Cancel
           </button>
-          <button className="btn__primary" onClick={onConfirm}>
+          <button className="btn btn__primary" onClick={onConfirm}>
             Confirm
           </button>
         </div>

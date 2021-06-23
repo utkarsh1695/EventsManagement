@@ -1,18 +1,19 @@
 @import "../../commonStyles/_variables.scss";
 
 .container {
+  padding: 0 20px;
+
   .createEventCtaContainer {
     width: 250px;
     border: 1px solid $DBlue;
-    margin: 50px auto;
+    margin: 30px auto;
     padding: 30px 100px;
     text-align: center;
   }
 
   ul {
     list-style: none;
-    margin: 20px auto;
-    width: 90%;
+    width: 100%;
     padding: 0;
 
     li {

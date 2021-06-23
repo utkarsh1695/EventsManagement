@@ -13,25 +13,27 @@ button,
 }
 
 // CTA Common CSS
-.btn__primary {
+.btn {
   margin-right: 20px;
   padding: 4px 10px;
-  background: $DBlue;
-  color: $White;
   border-radius: 4px;
   cursor: pointer;
   border: 1px solid $DBlue;
+
+  &__primary {
+    color: $White;
+    background: $DBlue;
+  }
+
+  &__secondary {
+    color: $DBlue;
+    background: $White;
+  }
 
   &:active,
   &:hover {
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
   }
-}
-
-.btn__secondary {
-  @extend .btn__primary;
-  color: $DBlue;
-  background: $White;
 }
 
 .formControl {
