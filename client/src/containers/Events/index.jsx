@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { Modal } from "../../components";
+import EventListItem from "../../components/EventListItem";
 import { createEvent, getEvents } from "../../services";
 import { createEventAction, getEventsAction } from "../../store/actions";
 import style from "./index.module.scss";
@@ -57,10 +58,15 @@ function Events() {
           </button>
         </div>
       )}
-      <h2>Events</h2>
       <ul>
         {events.map((event) => (
-          <li key={event._id}>{event.name}</li>
+          <EventListItem
+            key={event._id}
+            id={event._id}
+            name={event.name}
+            price={event.price}
+            isOwner={event.createdBy._id === auth?.userId}
+          />
         ))}
       </ul>
       {modal && (
