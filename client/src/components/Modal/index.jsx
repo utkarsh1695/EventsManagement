@@ -3,6 +3,7 @@ import style from "./index.module.scss";
 
 const Modal = ({
   title = "",
+  confirmText = "Confirm",
   onConfirm = () => {},
   onCancel = () => {},
   children,
@@ -16,11 +17,11 @@ const Modal = ({
         </header>
         <div className={style.content}>{children}</div>
         <div className={style.actions}>
+          <button className="btn btn__primary" onClick={onConfirm}>
+            {confirmText}
+          </button>
           <button className="btn btn__primary" onClick={onCancel}>
             Cancel
-          </button>
-          <button className="btn btn__primary" onClick={onConfirm}>
-            Confirm
           </button>
         </div>
       </div>

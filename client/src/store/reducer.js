@@ -3,6 +3,8 @@ import {
   AUTH_ACTION,
   CREATE_EVENT_ACTION,
   GET_EVENTS_ACTION,
+  GET_BOOKINGS_ACTION,
+  BOOK_EVENT_ACTION,
 } from "./actionTypes";
 
 const INITIAL_STATE = {
@@ -10,10 +12,10 @@ const INITIAL_STATE = {
   auth: null,
 
   // Events
-  events: [],
+  events: null,
 
   // Bookings
-  // ...
+  bookings: null,
 };
 
 const rootReducer = (state = INITIAL_STATE, { type, payload }) => {
@@ -34,7 +36,18 @@ const rootReducer = (state = INITIAL_STATE, { type, payload }) => {
       break;
 
     // Bookings
-    // ...
+    case GET_BOOKINGS_ACTION:
+      newState = { ...state, bookings: [...payload] };
+      break;
+    case BOOK_EVENT_ACTION:
+      newState = {
+        ...state,
+        bookings: [
+          ...(state?.bookings?.length > 0 ? state.bookings : []),
+          payload,
+        ],
+      };
+      break;
 
     default:
       newState = { ...state };

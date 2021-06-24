@@ -3,6 +3,8 @@ import {
   CREATE_USER_ACTION,
   CREATE_EVENT_ACTION,
   GET_EVENTS_ACTION,
+  GET_BOOKINGS_ACTION,
+  BOOK_EVENT_ACTION,
 } from "./actionTypes";
 
 export const authAction = (loginResponse) => ({
@@ -23,4 +25,14 @@ export const getEventsAction = (events) => ({
 export const createEventAction = (createEventResponse) => ({
   type: CREATE_EVENT_ACTION,
   payload: createEventResponse,
+});
+
+export const getBookingsAction = (bookings) => ({
+  type: GET_BOOKINGS_ACTION,
+  payload: bookings,
+});
+
+export const bookEventAction = (bookEventResponse) => ({
+  type: BOOK_EVENT_ACTION,
+  payload: bookEventResponse,
 });

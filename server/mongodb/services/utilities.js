@@ -5,7 +5,7 @@ const User = require("../models/User");
  * //************ Utility Functions ************
  */
 
-const dateToString = (date) => new Date(date).toISOString();
+const dateToString = (date) => (date ? new Date(date).toISOString() : "");
 
 const eventEntityToData = (event) => ({
   ...event.toJSON(),
@@ -20,8 +20,8 @@ const userEntityToData = (user) => ({
 
 const bookingEntityToData = (booking) => ({
   ...booking.toJSON(),
-  user: userEntityToData(booking.user),
-  event: eventEntityToData(booking.event),
+  user: userById.bind(this, booking.toJSON().user),
+  event: eventById.bind(this, booking.toJSON().event),
   createdAt: dateToString(booking.createdAt),
   updatedAt: dateToString(booking.updatedAt),
 });
@@ -48,8 +48,18 @@ const userById = async (userId) => {
   }
 };
 
+const eventById = async (eventId) => {
+  try {
+    const event = await Event.findById(eventId);
+    return eventEntityToData(event);
+  } catch (err) {
+    throw err;
+  }
+};
+
 module.exports = {
   userById,
+  eventById,
   eventEntityToData,
   userEntityToData,
   bookingEntityToData,

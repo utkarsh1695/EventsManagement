@@ -6,7 +6,14 @@ const { eventEntityToData, bookingEntityToData } = require("./utilities");
 const getBookings = async () => {
   try {
     const bookings = await Booking.find();
-    return bookings;
+    const list = bookings.map(bookingEntityToData);
+    console.log({
+      12345: {
+        1: bookings[0].user,
+        2: list[0].user,
+      },
+    });
+    return list;
   } catch (err) {
     throw err;
   }

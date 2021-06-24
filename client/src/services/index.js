@@ -77,3 +77,37 @@ export const createEvent = async ({
   });
   return response?.errors ? response.errors : response.data.createEvent;
 };
+
+export const getBookings = async () => {
+  const response = await fetch({
+    query: `
+      query {
+        bookings {
+          _id
+          createdAt
+          event {
+            _id
+            name
+          }
+        }
+      }
+    `,
+  });
+  return response?.errors ? response.errors : response.data.bookings;
+};
+
+export const bookEvent = async ({ eventId, token }) => {
+  const response = await fetch({
+    query: `
+      mutation {
+        bookEvent(eventId: "${eventId}") {
+          _id
+          createdAt
+          updatedAt
+        }
+      }
+    `,
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response?.errors ? response.errors : response.data.bookEvent;
+};

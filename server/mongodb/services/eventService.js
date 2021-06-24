@@ -5,7 +5,8 @@ const { eventEntityToData } = require("./utilities");
 const getEvents = async () => {
   try {
     const events = await Event.find();
-    return events.map(eventEntityToData);
+    const list = events.map(eventEntityToData);
+    return list;
   } catch (err) {
     throw err;
   }
@@ -24,7 +25,7 @@ const createEvent = async (eventInput, userId) => {
     });
     const createdEvent = await event.save();
 
-    const existingUser = await User.findOne({ _id: userId });
+    const existingUser = await User.findById(userId);
     existingUser.createdEvents.push(event);
     await existingUser.save();
 

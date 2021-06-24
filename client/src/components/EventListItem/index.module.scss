@@ -8,16 +8,22 @@
   justify-content: space-between;
   align-items: center;
 
-  h4,
-  h3 {
-    margin: 0;
+  .content {
+    h3 {
+      color: $DBlue;
+    }
+
+    h4 {
+      color: $DGrey;
+    }
   }
 
-  h3 {
-    color: $DBlue;
-  }
-
-  h4 {
-    color: $DGrey;
+  .viewDetails {
+    > div {
+      font-size: 18px;
+      font-weight: 600;
+      color: $DBlue;
+      margin-bottom: 15px;
+    }
   }
 }

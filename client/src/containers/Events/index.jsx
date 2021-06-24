@@ -3,8 +3,13 @@ import { useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { Modal } from "../../components";
 import EventListItem from "../../components/EventListItem";
-import { createEvent, getEvents } from "../../services";
-import { createEventAction, getEventsAction } from "../../store/actions";
+import Spinner from "../../components/Spinner";
+import { bookEvent, createEvent, getEvents } from "../../services";
+import {
+  bookEventAction,
+  createEventAction,
+  getEventsAction,
+} from "../../store/actions";
 import style from "./index.module.scss";
 
 function Events() {
@@ -12,6 +17,7 @@ function Events() {
   const { auth, events } = useSelector((state) => state, shallowEqual);
 
   const [modal, setModal] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   const titleEl = useRef();
   const priceEl = useRef();
@@ -49,6 +55,12 @@ function Events() {
     setModal(false);
   };
 
+  const bookEventCallback = async (eventId) => {
+    const response = await bookEvent({ eventId, token: auth?.token });
+    dispatch(bookEventAction(response));
+    setSelectedEvent(null);
+  };
+
   return (
     <div className={style.container}>
       {auth?.token && (
@@ -58,14 +70,21 @@ function Events() {
           </button>
         </div>
       )}
+      {!events && <Spinner />}
       <ul>
-        {events.map((event) => (
+        {events?.map((event) => (
           <EventListItem
             key={event._id}
             id={event._id}
             name={event.name}
             price={event.price}
+            date={event.date}
+            description={event.description}
             isOwner={event.createdBy._id === auth?.userId}
+            bookEvent={bookEventCallback}
+            hideDetails={() => setSelectedEvent(null)}
+            showDetails={() => setSelectedEvent(event)}
+            viewDetails={selectedEvent !== null}
           />
         ))}
       </ul>
