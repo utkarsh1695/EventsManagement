@@ -1,5 +1,15 @@
+const DataLoader = require("dataloader");
 const Event = require("../models/Event");
+const { events } = require("../models/User");
 const User = require("../models/User");
+
+/**
+ * //************ Data Loaders ************
+ */
+const eventLoader = new DataLoader((eventIds) => eventsByIds(eventIds));
+const userLoader = new DataLoader((userIds) =>
+  User.find({ _id: { $in: userIds } })
+);
 
 /**
  * //************ Utility Functions ************
@@ -15,7 +25,7 @@ const eventEntityToData = (event) => ({
 
 const userEntityToData = (user) => ({
   ...user.toJSON(),
-  createdEvents: eventsByIds.bind(this, user.toJSON().createdEvents),
+  createdEvents: eventLoader.load.bind(this, user.toJSON().createdEvents),
 });
 
 const bookingEntityToData = (booking) => ({
@@ -41,7 +51,7 @@ const eventsByIds = async (eventIds) => {
 
 const userById = async (userId) => {
   try {
-    const user = await User.findById(userId);
+    const user = await userLoader.load(userId.toString());
     return userEntityToData(user);
   } catch (err) {
     throw err;
@@ -50,8 +60,8 @@ const userById = async (userId) => {
 
 const eventById = async (eventId) => {
   try {
-    const event = await Event.findById(eventId);
-    return eventEntityToData(event);
+    const event = await eventLoader.load(eventId);
+    return event;
   } catch (err) {
     throw err;
   }
