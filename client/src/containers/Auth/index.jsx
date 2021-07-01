@@ -1,10 +1,11 @@
 import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { createUser, login } from "../../services";
 import { authAction } from "../../store/actions";
 import style from "./index.module.scss";
 
 function Auth() {
+  const { auth } = useSelector((state) => state, shallowEqual);
   const dispatch = useDispatch();
   const emailEl = useRef();
   const passwordEl = useRef();
@@ -28,7 +29,6 @@ function Auth() {
       response = await createUser({ email, password });
     }
 
-    console.log({ response });
     dispatch(authAction(response));
   };
 
@@ -42,6 +42,9 @@ function Auth() {
         <label htmlFor={"__auth_password__"}>Password</label>
         <input id={"__auth_password__"} type="password" ref={passwordEl} />
       </div>
+      {auth?.errors && (
+        <div className="error-msg">{auth?.errors[0].message}</div>
+      )}
       <div className={"formActions"}>
         <button className="btn btn__primary" type="submit">
           Submit

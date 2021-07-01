@@ -5,6 +5,7 @@ import {
   GET_EVENTS_ACTION,
   GET_BOOKINGS_ACTION,
   BOOK_EVENT_ACTION,
+  CANCEL_BOOKING_ACTION,
 } from "./actionTypes";
 
 export const authAction = (loginResponse) => ({
@@ -35,4 +36,9 @@ export const getBookingsAction = (bookings) => ({
 export const bookEventAction = (bookEventResponse) => ({
   type: BOOK_EVENT_ACTION,
   payload: bookEventResponse,
+});
+
+export const cancelBookingAction = (bookingId) => ({
+  type: CANCEL_BOOKING_ACTION,
+  payload: { deletedBookingId: bookingId },
 });

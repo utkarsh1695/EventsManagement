@@ -1,0 +1,14 @@
+@import "../../commonStyles/_variables.scss";
+
+.container {
+  padding: 8px 12px;
+  margin: 5px 0;
+  border: 1px solid $DBlue;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h3 {
+    color: $DGrey;
+  }
+}

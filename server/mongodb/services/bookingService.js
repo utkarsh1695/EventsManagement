@@ -3,16 +3,10 @@ const User = require("../models/User");
 const Booking = require("../models/Booking");
 const { eventEntityToData, bookingEntityToData } = require("./utilities");
 
-const getBookings = async () => {
+const getBookings = async (userId) => {
   try {
-    const bookings = await Booking.find();
+    const bookings = await Booking.find({ user: userId });
     const list = bookings.map(bookingEntityToData);
-    console.log({
-      12345: {
-        1: bookings[0].user,
-        2: list[0].user,
-      },
-    });
     return list;
   } catch (err) {
     throw err;

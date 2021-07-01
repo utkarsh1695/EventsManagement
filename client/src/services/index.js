@@ -12,7 +12,7 @@ export const login = async ({ email, password }) => {
       }
     `,
   });
-  return response?.errors ? response.errors : response.data.login;
+  return response?.errors ? response : response.data.login;
 };
 
 export const createUser = async ({ email, password }) => {
@@ -26,7 +26,7 @@ export const createUser = async ({ email, password }) => {
       }
     `,
   });
-  return response?.errors ? response.errors : response.data.createUser;
+  return response?.errors ? response : response.data.createUser;
 };
 
 export const getEvents = async () => {
@@ -47,7 +47,7 @@ export const getEvents = async () => {
       }
     `,
   });
-  return response?.errors ? response.errors : response.data.events;
+  return response?.errors ? response : response.data.events;
 };
 
 export const createEvent = async ({
@@ -75,10 +75,10 @@ export const createEvent = async ({
     `,
     headers: { Authorization: `Bearer ${token}` },
   });
-  return response?.errors ? response.errors : response.data.createEvent;
+  return response?.errors ? response : response.data.createEvent;
 };
 
-export const getBookings = async () => {
+export const getBookings = async ({ token }) => {
   const response = await fetch({
     query: `
       query {
@@ -92,8 +92,9 @@ export const getBookings = async () => {
         }
       }
     `,
+    headers: { Authorization: `Bearer ${token}` },
   });
-  return response?.errors ? response.errors : response.data.bookings;
+  return response?.errors ? response : response.data.bookings;
 };
 
 export const bookEvent = async ({ eventId, token }) => {
@@ -109,5 +110,20 @@ export const bookEvent = async ({ eventId, token }) => {
     `,
     headers: { Authorization: `Bearer ${token}` },
   });
-  return response?.errors ? response.errors : response.data.bookEvent;
+  return response?.errors ? response : response.data.bookEvent;
+};
+
+export const cancelEventBooking = async ({ bookingId, token }) => {
+  const response = await fetch({
+    query: `
+      mutation {
+        cancelBooking(bookingId: "${bookingId}") {
+          _id
+          name
+        }
+      }
+    `,
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response?.errors ? response : response.data.cancelBooking;
 };

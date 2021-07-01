@@ -5,6 +5,7 @@ import {
   GET_EVENTS_ACTION,
   GET_BOOKINGS_ACTION,
   BOOK_EVENT_ACTION,
+  CANCEL_BOOKING_ACTION,
 } from "./actionTypes";
 
 const INITIAL_STATE = {
@@ -47,6 +48,12 @@ const rootReducer = (state = INITIAL_STATE, { type, payload }) => {
           payload,
         ],
       };
+      break;
+    case CANCEL_BOOKING_ACTION:
+      const updatedBookings = state.bookings.filter(
+        (booking) => booking._id !== payload.deletedBookingId
+      );
+      newState = { ...state, bookings: updatedBookings };
       break;
 
     default:
