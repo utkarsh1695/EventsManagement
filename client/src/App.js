@@ -4,6 +4,7 @@ import Routes from "./routes";
 import "./App.scss";
 import Layout from "./Layout";
 import store from "./store";
+import Common from "./containers/Common";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <BrowserRouter>
         <Layout>
           <Routes />
+          <Common />
         </Layout>
       </BrowserRouter>
     </Provider>

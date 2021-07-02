@@ -1,3 +1,4 @@
+import { SNACKBAR_STATUS } from "../constants";
 import {
   CREATE_USER_ACTION,
   AUTH_ACTION,
@@ -6,9 +7,20 @@ import {
   GET_BOOKINGS_ACTION,
   BOOK_EVENT_ACTION,
   CANCEL_BOOKING_ACTION,
+  SHOW_SNACKBAR,
+  HIDE_SNACKBAR,
 } from "./actionTypes";
 
 const INITIAL_STATE = {
+  // Common
+  common: {
+    snackBar: {
+      show: false,
+      text: "",
+      status: SNACKBAR_STATUS.NEUTRAL,
+    },
+  },
+
   // Auth
   auth: null,
 
@@ -22,6 +34,30 @@ const INITIAL_STATE = {
 const rootReducer = (state = INITIAL_STATE, { type, payload }) => {
   let newState;
   switch (type) {
+    // Common
+    case SHOW_SNACKBAR:
+      newState = {
+        ...state,
+        common: {
+          ...state.common,
+          snackBar: {
+            show: true,
+            text: payload.text,
+            status: payload.status || SNACKBAR_STATUS.NEUTRAL,
+          },
+        },
+      };
+      break;
+    case HIDE_SNACKBAR:
+      newState = {
+        ...state,
+        common: {
+          ...state.common,
+          snackBar: { show: false, text: "", status: SNACKBAR_STATUS.NEUTRAL },
+        },
+      };
+      break;
+
     // Auth
     case AUTH_ACTION:
     case CREATE_USER_ACTION:

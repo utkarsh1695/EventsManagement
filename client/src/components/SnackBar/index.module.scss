@@ -1,0 +1,25 @@
+@import "../../commonStyles/_variables.scss";
+
+.container {
+  position: fixed;
+  bottom: 2%;
+  max-width: 80vw;
+  padding: 8px 12px;
+  border-radius: 20px;
+  color: $White;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+
+  &.neutral {
+    background-color: $DGrey;
+  }
+
+  &.success {
+    background-color: $Green;
+  }
+
+  &.failure {
+    background-color: $Red;
+  }
+}
